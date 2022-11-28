@@ -1,26 +1,15 @@
 /// Тоглогчийн ээлжийг хадгалах хувисагч 
-var activePlater = 0;
-///  Тоглолгчийн тсуглуулсан оноог хадгалах хувисагч 
-var scores = [0, 0];
-
-/// Тоглогчийн ээлжиндээ цуглуулж байгаа оноог харуулах хувисагч 
-var roundScore = 0;
-/// шооний али талаараа бууснийг хадгалагх хувисагч  1-6 гэсэн утгийг хуйвсагчинд оноож өгнө 
-
-// <div class="player-score" id="score-0">43</div>
-
-window.document.getElementById('score-0').textContent = '0';
-
-document.getElementById('score-1').textContent = ' 0';
-
-/// Программ эхлэх код 
-
-document.getElementById("current-0").textContent = '0';
-document.getElementById("current-1").textContent = '0 ';
+var activePlater;
+var scores ; 
+var roundScore ; 
+initGame();
 
 
 var diceDom = document.querySelector(".dice");
 diceDom.style.display = "none";
+
+// Тоглоом эхлүүлнэ 
+initGame(); 
 
 // Шоог шидэх 1-6 хүртэлх 
 
@@ -61,7 +50,7 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
 });
 
 
-document.querySelector(".btn-hold").addEventListener('click', function() {
+document.querySelector(".btn-hold").addEventListener('click', function () {
     // Уг тоглогчийн ээлжийн оноог глобал оноон дээр нэмэж өгнө 
     // if(activePlater === 0 ) 
     // {
@@ -70,13 +59,14 @@ document.querySelector(".btn-hold").addEventListener('click', function() {
     // }else {
     //     scores[1] = scores[1] + roundScore ; 
     // }  
-     
-    scores[activePlater] = scores[activePlater] + roundScore ; 
+
+    scores[activePlater] = scores[activePlater] + roundScore;
+    document.getElementById("score-" + activePlater).textContent = scores[activePlater];
+
 
     // Али тоглогч хожсон эсэхийг шалгана 
-    if(scores[activePlater] >=10 )
-    {
-        document.getElementById("name-"+activePlater).textContent =  'Яалалт' ;  
+    if (scores[activePlater] >= 10) {
+        document.getElementById("name-" + activePlater).textContent = 'Яалалт';
 
 
     }
@@ -85,22 +75,48 @@ document.querySelector(".btn-hold").addEventListener('click', function() {
 
     }
 
-    document.getElementById("score-"+activePlater).textContent = scores[activePlater];  
     // Ээлжийн оноог нь 0 болгоно 
-    switchToNextPlayer()
-    // Тоглогчийн ээлжийг солино 
-}); 
+    // Тоглогчийн ээлжийг zсолино
+    switchToNextPlayer();
 
-function switchToNextPlayer() 
-{
-    
+});
+
+function switchToNextPlayer() {
+
     // Ээлжийн оноог нь 0 болгоно 
     roundScore = 0;
-        document.getElementById("current-" + activePlater).textContent = 0;
-        activePlater === 0 ? (activePlater = 1) : (activePlater = 0);
-        document.querySelector(".player-0-panel").classList.toggle("active");
-        document.querySelector(".player-1-panel").classList.toggle("active");
-        diceDom.style.display = "none";
+    document.getElementById("current-" + activePlater).textContent = 0;
+    activePlater === 0 ? (activePlater = 1) : (activePlater = 0);
+    document.querySelector(".player-0-panel").classList.toggle("active");
+    document.querySelector(".player-1-panel").classList.toggle("active");
+    diceDom.style.display = "none";
 }
 
 
+
+
+/// шинэ тоглоом эхлүүлэх 
+document.querySelector(".btn-new").addEventListener('click', function () {
+    initGame(); 
+})
+
+
+function initGame(){
+     activePlater = 0;
+///  Тоглолгчийн тсуглуулсан оноог хадгалах хувисагч 
+ scores = [0, 0];
+
+/// Тоглогчийн ээлжиндээ цуглуулж байгаа оноог харуулах хувисагч 
+ roundScore = 0;
+/// шооний али талаараа бууснийг хадгалагх хувисагч  1-6 гэсэн утгийг хуйвсагчинд оноож өгнө 
+
+// <div class="player-score" id="score-0">43</div>
+
+window.document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = ' 0';
+/// Программ эхлэх код 
+document.getElementById("current-0").textContent = '0';
+document.getElementById("current-1").textContent = '0';
+
+
+}
