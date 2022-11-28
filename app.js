@@ -67,7 +67,7 @@ document.querySelector(".btn-hold").addEventListener('click', function () {
 
 
     // Али тоглогч хожсон эсэхийг шалгана 
-    if (scores[activePlater] >= 10) {
+    if (scores[activePlater] >= 100) {
         document.getElementById("name-" + activePlater).textContent = 'Яалалт';
         isNewGame = true; 
 
