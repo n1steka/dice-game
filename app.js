@@ -43,14 +43,7 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
 
     }
     else {
-        roundScore  = 0;  
-        // 1 буусан тул тоглолгчийн ээлжийг энэ хэсэгт солиж өгнө
-        document.getElementById("current-" + activePlater).textContent = 0;
-
-        activePlater === 0 ? (  activePlater = 1  ) : (activePlater = 0) ;    
-        document.querySelector(".player-0-panel").classList.toggle("active");
-        document.querySelector(".player-1-panel").classList.toggle("active");
-        // шоог түр алга болгоно 
+        switchToNextPlayer()
 
         diceDom.style.display = "none";
 
@@ -64,8 +57,50 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
         // }
     }
 
+
+});
+
+
+document.querySelector(".btn-hold").addEventListener('click', function() {
+    // Уг тоглогчийн ээлжийн оноог глобал оноон дээр нэмэж өгнө 
+    // if(activePlater === 0 ) 
+    // {
+    //     scores[0] = scores[0] + roundScore ; 
+
+    // }else {
+    //     scores[1] = scores[1] + roundScore ; 
+    // }  
+     
+    scores[activePlater] = scores[activePlater] + roundScore ; 
+
+    // Али тоглогч хожсон эсэхийг шалгана 
+    if(scores[activePlater] >=10 )
+    {
+        document.getElementById("name-"+activePlater).textContent =  'Яалалт' ;  
+
+
+    }
+
+    else {
+
+    }
+
+    document.getElementById("score-"+activePlater).textContent = scores[activePlater];  
+    // Ээлжийн оноог нь 0 болгоно 
+    switchToNextPlayer()
+    // Тоглогчийн ээлжийг солино 
 }); 
 
-        // Улааан цэгийг  шилжүүлэх 
+function switchToNextPlayer() 
+{
+    
+    // Ээлжийн оноог нь 0 болгоно 
+    roundScore = 0;
+        document.getElementById("current-" + activePlater).textContent = 0;
+        activePlater === 0 ? (activePlater = 1) : (activePlater = 0);
+        document.querySelector(".player-0-panel").classList.toggle("active");
+        document.querySelector(".player-1-panel").classList.toggle("active");
+        diceDom.style.display = "none";
+}
 
 
