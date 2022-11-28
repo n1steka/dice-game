@@ -2,6 +2,9 @@
 var activePlater;
 var scores ; 
 var roundScore ; 
+var gameOver;
+var isNewGame ; 
+ 
 initGame();
 
 
@@ -14,6 +17,8 @@ initGame();
 // Шоог шидэх 1-6 хүртэлх 
 
 document.querySelector(".btn-roll").addEventListener("click", function () {
+if(isNewGame !==true)
+{
     var diceNumber = Math.floor(Math.random() * 6 + 1);
     // Зургийг вэб-д гаргах 
     diceDom.style.display = "block";
@@ -35,23 +40,20 @@ document.querySelector(".btn-roll").addEventListener("click", function () {
         switchToNextPlayer()
 
         diceDom.style.display = "none";
-
-
-        // if(activePlater=== 0 )
-        // {
-        //     activePlater  = 1;  
-        // }
-        // else  {
-        //     activePlater= 0 ; 
-        // }
     }
 
+}else  {
+     alert('Тоглоом дууслаа эхлүүлэх товч дарж шинэ тоглоомийг эхлүүлнэ үү !') ; 
+}
 
 });
 
 
 document.querySelector(".btn-hold").addEventListener('click', function () {
-    // Уг тоглогчийн ээлжийн оноог глобал оноон дээр нэмэж өгнө 
+
+
+    if(isNewGame !==true){
+        // Уг тоглогчийн ээлжийн оноог глобал оноон дээр нэмэж өгнө 
     // if(activePlater === 0 ) 
     // {
     //     scores[0] = scores[0] + roundScore ; 
@@ -67,18 +69,18 @@ document.querySelector(".btn-hold").addEventListener('click', function () {
     // Али тоглогч хожсон эсэхийг шалгана 
     if (scores[activePlater] >= 10) {
         document.getElementById("name-" + activePlater).textContent = 'Яалалт';
-
+        isNewGame = true; 
 
     }
 
     else {
-
+        switchToNextPlayer();
     }
 
     // Ээлжийн оноог нь 0 болгоно 
     // Тоглогчийн ээлжийг zсолино
-    switchToNextPlayer();
 
+    }
 });
 
 function switchToNextPlayer() {
